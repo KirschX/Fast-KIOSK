@@ -29,8 +29,7 @@ async def speech_to_text(audio_file: UploadFile):
     if not transcript:
         return HTTPException(status_code=400, detail="Failed to decode audio")
 
-    order = parse_menu(transcript)
-    return order
+    return parse_menu(transcript)
 
 @app.post("/api/stt/answer")
 async def speech_to_text(audio_file: UploadFile):
@@ -45,5 +44,8 @@ async def speech_to_text(audio_file: UploadFile):
     if not transcript:
         return HTTPException(status_code=400, detail="Failed to decode audio")
 
-    answer = parse_answer(transcript)
-    return answer
+    return parse_answer(transcript)
+
+@app.post("/api/text-parsing")
+async def parse_text(text: str):
+    return parse_menu(text)
