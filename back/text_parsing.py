@@ -1,5 +1,5 @@
 from functools import partial
-from db import menus, sets, nums, take_outs, answers
+from db import menus, sets, amounts, take_outs, answers
 
 def parse_option(option, order, text, word, value):
     if word in text:
@@ -11,7 +11,7 @@ def parse_iterator(parse_func, order, text, **data):
             parse_func(order, text, val, key)
 
 _parse_menu = partial(parse_option, 'menu')
-_parse_num = partial(parse_option, 'amount')
+_parse_amount = partial(parse_option, 'amount')
 _parse_set = partial(parse_option, 'set')
 _parse_take_out = partial(parse_option, 'take_out')
 _parse_answer = partial(parse_option, 'answer')
@@ -26,7 +26,7 @@ def parse_menu(text):
 
     parse_iterator(_parse_menu, order, text, **menus)
     parse_iterator(_parse_set, order, text, **sets)
-    parse_iterator(_parse_num, order, text, **nums)
+    parse_iterator(_parse_amount, order, text, **amounts)
     parse_iterator(_parse_take_out, order, text, **take_outs)
 
     return order
