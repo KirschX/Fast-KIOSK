@@ -1,3 +1,4 @@
+import os
 import openai
 
 from fastapi import FastAPI, UploadFile
@@ -5,7 +6,10 @@ from fastapi.exceptions import HTTPException
 
 from text_parsing import parse_menu, parse_answer
 
-openai.api_key = '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'
+from dotenv import load_dotenv
+load_dotenv()
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 app = FastAPI()
 

@@ -3,4 +3,11 @@ __pycache__
 .idea
 
 # venv
+.env
 .venv/
+
+# audio file
+*.mp3
+
+# test file
+test.py
