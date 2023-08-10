@@ -20,6 +20,18 @@ def save_audio_file(contents, audio_file_name="audio.mp3"):
         audio_file = open(audio_file_name, "rb")
         return audio_file
 
+@app.get("/")
+async def root():
+    return {
+        '/': 'root',
+        '/pdf': 'API 설명서.pdf',
+        '/api/stt/menu': '음성으로부터 단어 추출 (메뉴)',
+        '/api/stt/answer': '음성으로부터 단어 추출  (답변)',
+        '/api/text/menu': '텍스트로부터 단어 추출 (메뉴)',
+        '/api/text/answer': '텍스트로부터 단어 추출 (답변)',
+        }
+
+
 @app.post("/api/stt/menu")
 async def speech_to_text(audio_file: UploadFile):
     contents = await audio_file.read()
