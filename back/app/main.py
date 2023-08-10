@@ -6,7 +6,8 @@ from fastapi.exceptions import HTTPException
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
-from text_parsing import parse_menu, parse_answer
+from .text_parsing import parse_menu, parse_answer
+
 from dotenv import load_dotenv
 load_dotenv()
 

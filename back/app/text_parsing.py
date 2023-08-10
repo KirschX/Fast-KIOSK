@@ -1,5 +1,5 @@
 from functools import partial
-from db import menus, sets, amounts, take_outs, answers
+from .db import menus, sets, amounts, take_outs, answers
 
 def parse_option(option, order, text, word, value):
     if word in text:
