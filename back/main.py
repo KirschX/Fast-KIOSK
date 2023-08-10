@@ -3,6 +3,7 @@ import openai
 
 from fastapi import FastAPI, UploadFile
 from fastapi.exceptions import HTTPException
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
 from text_parsing import parse_menu, parse_answer
@@ -15,13 +16,13 @@ app = FastAPI()
 
 class Text(BaseModel):
     text: str
-    
+
 def save_audio_file(contents, audio_file_name="audio.mp3"):
     with open(audio_file_name, "wb") as f:
         f.write(contents)
 
-        audio_file = open(audio_file_name, "rb")
-        return audio_file
+    audio_file = open(audio_file_name, "rb")
+    return audio_file
 
 @app.get("/")
 async def root():
@@ -34,6 +35,13 @@ async def root():
         '/api/text/answer': '텍스트로부터 단어 추출 (답변)',
         }
 
+@app.get('/pdf')
+async def get_pdf():
+    return FileResponse(
+            "API 설명서.pdf",
+            media_type="application/pdf",
+            filename="API_설명서.pdf"
+            )
 
 @app.post("/api/stt/menu")
 async def speech_to_text_menu(audio_file: UploadFile):
