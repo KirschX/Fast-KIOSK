@@ -22,6 +22,7 @@ def parse_menu(text):
         'set': '단품',  # 단품 / 세트
         'amount': 1,  # 수량
         'take_out': '매장',  # 포장 / 매장
+        'text': text,  # 원본 텍스트
     }
 
     parse_iterator(_parse_menu, order, text, **menus)
@@ -32,7 +33,11 @@ def parse_menu(text):
     return order
 
 def parse_answer(text):
-    answer = {'answer': None}
+    answer = {
+        'answer': None,  # 답변 (네 / 아니요)
+        'text': text,  # 원본 텍스트
+    }
+    
     parse_iterator(_parse_answer, answer, text, **answers)
 
     return answer
