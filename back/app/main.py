@@ -39,7 +39,7 @@ async def root():
 @app.get('/pdf')
 async def get_pdf():
     return FileResponse(
-            "API 설명서.pdf",
+            "API_instruction.pdf",
             media_type="application/pdf",
             filename="API_설명서.pdf"
             )
