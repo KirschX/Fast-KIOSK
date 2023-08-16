@@ -14,6 +14,8 @@ _parse_menu = partial(parse_option, 'burger')
 _parse_set = partial(parse_option, 'type')
 _parse_amount = partial(parse_option, 'quantity')
 _parse_take_out = partial(parse_option, 'isTakeout')
+_parse_beverage = partial(parse_option, 'beverage')
+_parse_side = partial(parse_option, 'side')
 _parse_answer = partial(parse_option, 'answer')
 
 def parse_menu(text):
@@ -23,6 +25,7 @@ def parse_menu(text):
         'quantity': 1,  # 수량
         'isTakeout': '매장',  # 포장 / 매장
         'beverage': None,  # 포장 / 매장
+        'side': None,  # 사이드
         'text': text,  # 원본 텍스트
     }
 
@@ -30,6 +33,8 @@ def parse_menu(text):
     parse_iterator(_parse_set, order, text, **sets)
     parse_iterator(_parse_amount, order, text, **amounts)
     parse_iterator(_parse_take_out, order, text, **take_outs)
+    parse_iterator(_parse_beverage, order, text, **beverages)
+    parse_iterator(_parse_side, order, text, **sides)
 
     if order['isTakeout'] == '매장':
         order['isTakeout'] = False
