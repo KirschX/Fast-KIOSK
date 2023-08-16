@@ -1,5 +1,5 @@
 from functools import partial
-from .db import menus, sets, amounts, take_outs, answers
+from .db import *
 
 def parse_option(option, order, text, word, value):
     if word in text:
@@ -10,18 +10,19 @@ def parse_iterator(parse_func, order, text, **data):
         for val in values:
             parse_func(order, text, val, key)
 
-_parse_menu = partial(parse_option, 'menu')
-_parse_amount = partial(parse_option, 'amount')
-_parse_set = partial(parse_option, 'set')
-_parse_take_out = partial(parse_option, 'take_out')
+_parse_menu = partial(parse_option, 'burger')
+_parse_set = partial(parse_option, 'type')
+_parse_amount = partial(parse_option, 'quantity')
+_parse_take_out = partial(parse_option, 'isTakeout')
 _parse_answer = partial(parse_option, 'answer')
 
 def parse_menu(text):
     order = {
-        'menu': None,  # 메뉴명
-        'set': '단품',  # 단품 / 세트
-        'amount': 1,  # 수량
-        'take_out': '매장',  # 포장 / 매장
+        'burger': None,  # 메뉴명
+        'type': '단품',  # 단품 / 세트
+        'quantity': 1,  # 수량
+        'isTakeout': '매장',  # 포장 / 매장
+        'beverage': None,  # 포장 / 매장
         'text': text,  # 원본 텍스트
     }
 
@@ -29,6 +30,11 @@ def parse_menu(text):
     parse_iterator(_parse_set, order, text, **sets)
     parse_iterator(_parse_amount, order, text, **amounts)
     parse_iterator(_parse_take_out, order, text, **take_outs)
+
+    if order['isTakeout'] == '매장':
+        order['isTakeout'] = False
+    elif order['isTakeout'] == '포장':
+        order['isTakeout'] = True
 
     return order
 
