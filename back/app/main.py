@@ -4,6 +4,8 @@ import openai
 from fastapi import FastAPI, UploadFile
 from fastapi.exceptions import HTTPException
 from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
+
 from pydantic import BaseModel
 
 from .text_parsing import parse_menu, parse_answer
@@ -14,6 +16,13 @@ load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_credentials=True,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class Text(BaseModel):
     text: str
