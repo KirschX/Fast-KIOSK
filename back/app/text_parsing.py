@@ -20,27 +20,30 @@ _parse_answer = partial(parse_option, 'answer')
 
 def parse_menu(text):
     order = {
-        'burger': None,  # 메뉴명
-        'type': '단품',  # 단품 / 세트
-        'quantity': 1,  # 수량
+        'ok': False,  # 메뉴명 파싱 성공 여부
+        'menu': {},  # 메뉴 정보
         'isTakeout': '매장',  # 포장 / 매장
-        'beverage': None,  # 포장 / 매장
-        'side': None,  # 사이드
         'text': text,  # 원본 텍스트
     }
 
-    parse_iterator(_parse_menu, order, text, **menus)
-    parse_iterator(_parse_set, order, text, **sets)
-    parse_iterator(_parse_amount, order, text, **amounts)
+    menu = {
+        'burger': None,  # 메뉴명
+        'type': '단품',  # 단품 / 세트
+        'quantity': 1,  # 수량
+        'beverage': '콜라',  # 음료
+        'side': '감자튀김',  # 사이드
+    }
+
+    parse_iterator(_parse_menu, menu, text, **menus)
+    parse_iterator(_parse_set, menu, text, **sets)
+    parse_iterator(_parse_amount, menu, text, **amounts)
+    parse_iterator(_parse_beverage, menu, text, **beverages)
+    parse_iterator(_parse_side, menu, text, **sides)
     parse_iterator(_parse_take_out, order, text, **take_outs)
-    parse_iterator(_parse_beverage, order, text, **beverages)
-    parse_iterator(_parse_side, order, text, **sides)
 
-    if order['isTakeout'] == '매장':
-        order['isTakeout'] = False
-    elif order['isTakeout'] == '포장':
-        order['isTakeout'] = True
-
+    order['menu'] = menu
+    order['ok'] = menu['burger'] is not None
+    order['isTakeout'] = order['isTakeout'] == '포장'
     return order
 
 def parse_answer(text):
