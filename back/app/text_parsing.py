@@ -17,6 +17,7 @@ _parse_take_out = partial(parse_option, 'isTakeout')
 _parse_beverage = partial(parse_option, 'beverage')
 _parse_side = partial(parse_option, 'side')
 _parse_answer = partial(parse_option, 'answer')
+_parse_pay = partial(parse_option, 'pay')
 
 def parse_menu(text):
     order = {
@@ -53,9 +54,20 @@ def parse_answer(text):
     }
     
     parse_iterator(_parse_answer, answer, text, **answers)
+    answer['answer'] = answer['answer'] is not None
 
     return answer
 
+def parse_pay(text):
+    pay = {
+        'pay': None,  # 결제 여부
+        'text': text,  # 원본 텍스트
+    }
+
+    parse_iterator(_parse_pay, pay, text, **pays)
+    pay['pay'] = pay['pay'] is not None
+
+    return pay
 
 if __name__ == '__main__':
     order = parse_menu(text="빙맥 세투 두게 포장 부탁해요")

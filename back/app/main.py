@@ -8,7 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from pydantic import BaseModel
 
-from .text_parsing import parse_menu, parse_answer
+from .text_parsing import parse_menu, parse_answer, parse_pay
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -82,6 +82,21 @@ async def speech_to_text_answer(audio_file: UploadFile):
         raise HTTPException(status_code=400, detail="Failed to decode audio")
 
     return parse_answer(transcript.text)
+
+@app.post("/api/stt/pay")
+async def speech_to_text_pay(audio_file: UploadFile):
+    contents = await audio_file.read()
+    audio_file = save_audio_file(contents)
+
+    try:
+        transcript = openai.Audio.transcribe("whisper-1", audio_file)
+    except:
+        raise HTTPException(status_code=400, detail="Failed to load audio file")
+
+    if not transcript:
+        raise HTTPException(status_code=400, detail="Failed to decode audio")
+
+    return parse_pay(transcript.text)
 
 @app.post("/api/text/menu")
 async def parse_text_menu(text: Text):
