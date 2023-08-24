@@ -1075,18 +1075,6 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.47.0.tgz#5478fdf443ff8158f9de171c704ae45308696c7d"
   integrity sha512-P6omY1zv5MItm93kLM8s2vr1HICJH8v0dvddDhysbIuZ+vcjOHg5Zbkf1mTkcmi2JA9oBG2anOkRnW8WJTS8Og==
 
-"@ffmpeg/ffmpeg@^0.12.4":
-  version "0.12.4"
-  resolved "https://registry.yarnpkg.com/@ffmpeg/ffmpeg/-/ffmpeg-0.12.4.tgz#38ce7a131960e23a939b624558916883b97c8703"
-  integrity sha512-YwdnZFxtKncEbg2ybJOZ8di7kxtVo6DP3FkWWn5E0MiXHXxCjgiIJNq5I+/04+OGC1nMvF3hdvGuRFxuogh/mQ==
-  dependencies:
-    "@ffmpeg/types" "^0.12.0"
-
-"@ffmpeg/types@^0.12.0":
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/@ffmpeg/types/-/types-0.12.0.tgz#fe6affeea2d599d6d2d57e2c57eb8ca384c7b2a2"
-  integrity sha512-AuR4K+L6v1/9hVOsikU4rGGT5nKulQa8HrtYhpgBEq0HojoWB1c9bq3TTkNBpEvS/gC17WDMVJrqIGgXOj1DXA==
-
 "@humanwhocodes/config-array@^0.11.10":
   version "0.11.10"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.11.10.tgz#5a3ffe32cc9306365fb3fd572596cd602d5e12d2"
@@ -1348,11 +1336,6 @@
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@trysound/sax/-/sax-0.2.0.tgz#cccaab758af56761eb7bf37af6f03f326dd798ad"
   integrity sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==
-
-"@types/ffmpeg@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@types/ffmpeg/-/ffmpeg-1.0.4.tgz#e82c080f7846de13e17bf0a2d49dd841651b8686"
-  integrity sha512-USbiJIZRuoO1n/HUTkxCPH0hvjVUOLUbkicwbh+9GOjwg0IFZOU0aDVMJV0A27nC42Bx6rujunU6pfdjw866JQ==
 
 "@types/hoist-non-react-statics@^3.3.1":
   version "3.3.1"
