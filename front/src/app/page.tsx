@@ -1,113 +1,117 @@
-import Image from 'next/image'
+"use client";
+
+import { useState, useRef, useEffect } from "react";
+import Character from "@public/character.svg";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+
+import UseOrder from "@/hooks/useOrder";
+import useAudioRecording from "@/hooks/useAudioRecording";
+import { resetOrder, updateProduct } from "@/redux/slices/orderSlice";
+
+import EatIn from "@public/eatIn.svg";
+import Takeout from "@public/takeout.svg";
 
 export default function Home() {
+  const [voiceStarted, setVoiceStarted] = useState(false);
+  const router = useRouter();
+  const { startRecording, stopRecording, sendDataToServer, loading } =
+    useAudioRecording();
+
+  const { handleAddProduct, order, handleUpdateProduct, handleSetTakeout } =
+    UseOrder();
+
+  const startVoiceGuidance = () => {
+    const lang = "ko-KR";
+    const script =
+      "아래 버튼을 누르거나 포장하기 혹은 매장에서 식사하기 라고 말씀해주세요";
+    const utterance = new SpeechSynthesisUtterance(script);
+    utterance.lang = lang;
+    window.speechSynthesis.speak(utterance);
+    setVoiceStarted(true);
+  };
+
+  // useEffect(() => {
+  //   const speak = (txt: string) => {
+  //     const lang = "ko-KR";
+  //     const utterance = new SpeechSynthesisUtterance(txt);
+  //     utterance.lang = lang;
+  //     window.speechSynthesis.speak(utterance);
+  //   };
+
+  //   const handleVoicesChanged = () => {
+  //     speak("안녕하세요");
+  //   };
+
+  //   // Wait for voices to be loaded
+  //   window.speechSynthesis.addEventListener(
+  //     "voiceschanged",
+  //     handleVoicesChanged
+  //   );
+
+  //   // Attempt to speak immediately in case voices are already loaded
+  //   speak("안녕하세요");
+
+  //   // Clean up the listener if it was added
+  //   return () => {
+  //     window.speechSynthesis.removeEventListener(
+  //       "voiceschanged",
+  //       handleVoicesChanged
+  //     );
+  //   };
+  // }, []);
+
+  // useEffect(() => {
+  //   console.log("asd");
+  //   resetOrder();
+  // }, []);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <div className=" flex justify-center items-center">
+      <div className=" relative top-16 left-6">
+        <Image src="/character.png" alt="" width={500} height={1000} />
+      </div>
+      <div className=" flex flex-col items-center relative mt-24">
+        {/* <button onClick={startVoiceGuidance}>Start Voice Guidance</button> */}
+        <div className=" ml-10 mb-10">
+          <div className="text-h1 font-bold whitespace-nowrap ">
+            어디에서 드시나요?
+          </div>
+          <div className=" flex ml-4">
+            <div className=" text-h3 font-medium">
+              <div>안녕하세요, 쉽고 빠른 음성 주문을 경험해보세요!</div>
+            </div>
+          </div>
         </div>
+
+        <div className="flex bg-white p-4 rounded-lg text-[48px]">
+          <div
+            className=" bg-[#FEBB15] drop-shadow-[-5px_20px_4px_rgba(0,0,0,0.15)] m-4 w-[541px] h-[670px] flex flex-col  items-center rounded-[60px]"
+            onClick={() => {
+              handleSetTakeout(true);
+              router.push("/f1");
+            }}
+          >
+            <div className=" mt-20">
+              <Image src="/takeout.png" width={322} height={322} alt="" />
+            </div>
+            <div className="  mt-20 font-bold text-h2">{`"포장하기"`}</div>
+          </div>
+          <div
+            className=" bg-[#FEBB15] drop-shadow-[-5px_20px_4px_rgba(0,0,0,0.15)]  m-4 w-[541px] h-[670px] flex flex-col  items-center rounded-[60px]"
+            onClick={() => {
+              handleSetTakeout(false);
+              router.push("/f1");
+            }}
+          >
+            <div className=" mt-20">
+              <Image src="/eatIn.png" width={322} height={322} alt="" />
+            </div>
+            <div className=" mt-20 font-bold text-h2">{`"매장에서"`}</div>
+          </div>
+        </div>
+        <div className="flex bg-white p-4 rounded-lg"></div>
       </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+    </div>
+  );
 }
