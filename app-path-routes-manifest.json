@@ -1,0 +1,11 @@
+{
+  "/favicon.ico/route": "/favicon.ico",
+  "/page": "/",
+  "/f1/page": "/f1",
+  "/f2/page": "/f2",
+  "/f3/page": "/f3",
+  "/f4/page": "/f4",
+  "/f2/side/page": "/f2/side",
+  "/f2/ingredients/page": "/f2/ingredients",
+  "/f2/beverage/page": "/f2/beverage"
+}
