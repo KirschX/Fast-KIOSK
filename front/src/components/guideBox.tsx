@@ -82,7 +82,7 @@ export default function GuideBox({
   return (
     <>
       <div className=" flex px-10">
-        <div className=" relative w-[140px] h-[140px] flex justify-center items-center pl-2 top-6">
+        <div className=" relative w-[140px] h-[140px] flex justify-center items-center pl-2">
           <LoadingRing isLoading={true} />
           <div className=" flex justify-center items-center relative left-[6px] bottom-[2px] z-0">
             <Character_head width={100} height={100} />
