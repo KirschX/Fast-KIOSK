@@ -149,8 +149,8 @@ if (true) {
 
 // Exports
 module.exports = {
-	"style": {"fontFamily":"'__Inter_7c0dc3', '__Inter_Fallback_7c0dc3'","fontStyle":"normal"},
-	"className": "__className_7c0dc3"
+	"style": {"fontFamily":"'__Inter_20951f', '__Inter_Fallback_20951f'","fontStyle":"normal"},
+	"className": "__className_20951f"
 };
 
 
@@ -161,8 +161,8 @@ module.exports = {
 
 // Exports
 module.exports = {
-	"style": {"fontFamily":"'__notoSansKr_7604ed', '__notoSansKr_Fallback_7604ed'","fontStyle":"normal"},
-	"className": "__className_7604ed"
+	"style": {"fontFamily":"'__notoSansKr_09437d', '__notoSansKr_Fallback_09437d'","fontStyle":"normal"},
+	"className": "__className_09437d"
 };
 
 
@@ -184,7 +184,7 @@ Object.defineProperty(exports, "addBasePath", ({
 }));
 const _addpathprefix = __webpack_require__(893);
 const _normalizetrailingslash = __webpack_require__(1094);
-const basePath = "/Fast-KIOSK" || 0;
+const basePath =  false || "";
 function addBasePath(path, required) {
     return (0, _normalizetrailingslash.normalizePathTrailingSlash)( false ? 0 : (0, _addpathprefix.addPathPrefix)(path, basePath));
 }
@@ -4732,7 +4732,7 @@ Object.defineProperty(exports, "hasBasePath", ({
     }
 }));
 const _pathhasprefix = __webpack_require__(4614);
-const basePath = "/Fast-KIOSK" || 0;
+const basePath =  false || "";
 function hasBasePath(path) {
     return (0, _pathhasprefix.pathHasPrefix)(path, basePath);
 }
@@ -4797,7 +4797,7 @@ Object.defineProperty(exports, "removeBasePath", ({
     }
 }));
 const _hasbasepath = __webpack_require__(3847);
-const basePath = "/Fast-KIOSK" || 0;
+const basePath =  false || "";
 function removeBasePath(path) {
     if (false) {}
     // Can't trim the basePath if it has zero length!
@@ -9465,7 +9465,7 @@ function isDynamicRoute(route) {
 
 /***/ }),
 
-/***/ 3881:
+/***/ 5777:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -9515,7 +9515,7 @@ Object.defineProperty(exports, "parseUrl", ({
     }
 }));
 const _querystring = __webpack_require__(2027);
-const _parserelativeurl = __webpack_require__(3881);
+const _parserelativeurl = __webpack_require__(5777);
 function parseUrl(url) {
     if (url.startsWith("/")) {
         return (0, _parserelativeurl.parseRelativeUrl)(url);

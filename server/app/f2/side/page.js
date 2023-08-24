@@ -212,7 +212,7 @@ module.exports = require("url");
 
 /***/ }),
 
-/***/ 873:
+/***/ 2517:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -265,7 +265,7 @@ const tree = {
         {
           
           metadata: {
-    icon: [(async (props) => (await Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 8442))).default(props))],
+    icon: [(async (props) => (await Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 3881))).default(props))],
     apple: [],
     openGraph: [],
     twitter: [],
@@ -277,7 +277,7 @@ const tree = {
         {
           'layout': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 5904)), "C:\\Users\\mk448\\Dv_study\\새 폴더\\front\\src\\app\\layout.tsx"],
           metadata: {
-    icon: [(async (props) => (await Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 8442))).default(props))],
+    icon: [(async (props) => (await Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 3881))).default(props))],
     apple: [],
     openGraph: [],
     twitter: [],
@@ -460,7 +460,7 @@ const __default__ = proxy.default;
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [587,846,185,6,75], () => (__webpack_exec__(873)));
+var __webpack_exports__ = __webpack_require__.X(0, [587,846,185,562,75], () => (__webpack_exec__(2517)));
 module.exports = __webpack_exports__;
 
 })();
