@@ -44,7 +44,7 @@ export default function F4() {
       <div className=" flex justify-start">
         <div className=" h-[300px] text-h1 font-bold pt-20 ml-10">결제완료</div>
       </div>
-      <div className=" flex justify-center items-center my-60">
+      <div className=" flex justify-center items-center my-20">
         <OrderNumberExample />
       </div>
       {/* <div className=" text-guide flex mx-8 font-medium mb-20">
@@ -58,7 +58,7 @@ export default function F4() {
         </div>
       </div> */}
       <GuideBox isLoading={false}>{guideTextJSX[stage]}</GuideBox>
-      <div className=" flex justify-center items-center mt-60">
+      <div className=" flex justify-center items-center mt-24">
         <div className="w-full rounded-[50px] bg-gray-Light_2 text-gray-Medium p-4 mx-20 shadow-lg text-h2 text-center">
           결제 취소
         </div>

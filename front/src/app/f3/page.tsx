@@ -35,7 +35,7 @@ export default function F3() {
       <div className=" flex justify-start">
         <div className=" h-[300px] text-h1 font-bold pt-20 ml-10">결제하기</div>
       </div>
-      <div className=" flex justify-center items-center ">
+      <div className=" flex justify-center items-center relative bottom-20">
         {/* <div className=" bg-gray-400 w-[1000px] h-[1000px] mb-32"></div> */}
         <CardPaymentAnimation />
       </div>

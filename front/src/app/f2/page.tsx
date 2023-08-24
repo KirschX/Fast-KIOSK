@@ -107,7 +107,7 @@ export default function F2() {
 
   return (
     <div className=" w-full items-start">
-      <div className=" flex justify-start mb-20">
+      <div className=" flex justify-start mb-14">
         <div className=" h-[300px] text-h1 font-bold pt-20 ml-10">주문내역</div>
       </div>
       <div className=" grid grid-cols-11 text-[50px] mx-10 text-center">
@@ -117,7 +117,7 @@ export default function F2() {
         <div className=" col-span-2">수량변경</div>
         <div className=" col-span-1">취소</div>
       </div>
-      <div className=" col-span-4 border-b-[1px] mb-20"> </div>
+      <div className=" col-span-4 border-b-[1px] mb-10"> </div>
       {order.products.map((item, index) => (
         <div
           key={index}
@@ -209,7 +209,7 @@ export default function F2() {
         </div>
       ))}
       <div className=" col-span-4 border-b-[1px]"> </div>
-      <div className=" flex justify-end p-4 text-guide font-bold mb-40">{`총 ${totalPrice}원`}</div>
+      <div className=" flex justify-end p-4 text-guide font-bold mb-32">{`총 ${totalPrice}원`}</div>
       <div className=" mb-20">
         <GuideBox isLoading={loading}>{guideTextJSX[order.payStage]}</GuideBox>
       </div>
