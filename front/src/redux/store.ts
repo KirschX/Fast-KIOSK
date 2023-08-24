@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import orderReducer from "@/redux/slices/orderSlice";
+import recordingSlice from "./slices/recordingSlice";
 
 const store = configureStore({
   reducer: {
     order: orderReducer,
+    recording: recordingSlice,
   },
   devTools: process.env.NODE_ENV !== "production",
 });
