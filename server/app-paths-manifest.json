@@ -2,10 +2,10 @@
   "/favicon.ico/route": "app/favicon.ico/route.js",
   "/page": "app/page.js",
   "/f1/page": "app/f1/page.js",
-  "/f2/page": "app/f2/page.js",
   "/f3/page": "app/f3/page.js",
+  "/f2/page": "app/f2/page.js",
   "/f4/page": "app/f4/page.js",
+  "/f2/beverage/page": "app/f2/beverage/page.js",
   "/f2/side/page": "app/f2/side/page.js",
-  "/f2/ingredients/page": "app/f2/ingredients/page.js",
-  "/f2/beverage/page": "app/f2/beverage/page.js"
+  "/f2/ingredients/page": "app/f2/ingredients/page.js"
 }
