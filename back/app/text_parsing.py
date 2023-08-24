@@ -31,8 +31,8 @@ def parse_menu(text):
         'burger': None,  # 메뉴명
         'type': '단품',  # 단품 / 세트
         'quantity': 1,  # 수량
-        'beverage': '콜라',  # 음료
-        'side': '감자튀김',  # 사이드
+        'beverage': None,  # 음료
+        'side': None,  # 사이드
     }
 
     parse_iterator(_parse_menu, menu, text, **menus)
@@ -45,6 +45,13 @@ def parse_menu(text):
     order['menu'] = menu
     order['ok'] = menu['burger'] is not None
     order['isTakeout'] = order['isTakeout'] == '포장'
+
+    if menu['type'] == '세트':
+        if menu['beverage'] is None:
+            menu['beverage'] = '콜라'
+        if menu['side'] is None:
+            menu['side'] = '감자튀김'
+
     return order
 
 def parse_answer(text):
