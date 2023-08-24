@@ -139,7 +139,9 @@ export default function F2() {
                     : displayText;
                 })()}
               </div>
-              <div className=" text-[36px] text-gray-Light">{`${item.side}, ${item.beverage}`}</div>
+              <div className=" text-[36px] text-gray-Light">{`${
+                item.side || ""
+              }, ${item.beverage || ""}`}</div>
             </div>
           </div>
           <div className=" col-span-3">

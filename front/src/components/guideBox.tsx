@@ -32,6 +32,7 @@ export const LoadingRing = ({ isLoading = true }: { isLoading: boolean }) => {
 
   return (
     <motion.div
+      className=" z-10"
       initial={{ rotate: 150 }}
       animate={controls}
       variants={loadingRingVariants}
@@ -44,8 +45,8 @@ export const LoadingRing = ({ isLoading = true }: { isLoading: boolean }) => {
         border: "8px solid white",
         borderTop: "8px solid #FEBB15",
         borderRadius: "50%",
-        width: "210px",
-        height: "210px",
+        width: "140px",
+        height: "140px",
         position: "absolute",
       }}
     />
@@ -81,16 +82,16 @@ export default function GuideBox({
   return (
     <>
       <div className=" flex px-10">
-        <div className=" relative w-[210px] h-[210px] flex justify-center pl-8">
-          <LoadingRing isLoading={isLoading} />
-          <div className=" flex justify-center">
-            <Character_head />
+        <div className=" relative w-[140px] h-[140px] flex justify-center items-center pl-2 top-6">
+          <LoadingRing isLoading={true} />
+          <div className=" flex justify-center items-center relative left-[6px] bottom-[2px] z-0">
+            <Character_head width={100} height={100} />
           </div>
         </div>
         {/* <div className=" text-guide pl-14">{children || text}</div> */}
         <motion.div
           key={`${order.orderStage}-${order.payStage}`} // This forces a remount when either value changes
-          className=" text-guide pl-14"
+          className=" text-guide pl-14 z-10"
           initial="hidden"
           animate="visible"
           variants={{
