@@ -33,6 +33,6 @@
     "@svgr/webpack": "^8.0.1"
   },
   "engines": {
-    "node": "18.17.0"
+    "node": "18"
   }
 }
