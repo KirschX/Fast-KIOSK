@@ -188,14 +188,14 @@ export default function F11() {
   // }, [order.orderStage]);
 
   // redux order state 변경되었을 경우
-  useEffect(() => {
-    if (initialRender.current) {
-      initialRender.current = false;
-      return;
-    }
-    console.log(order);
-    // if (!order.ok) setOrderStage(2);
-  }, [burger, order, quantity, router, type]);
+  // useEffect(() => {
+  //   if (initialRender.current) {
+  //     initialRender.current = false;
+  //     return;
+  //   }
+  //   console.log(order);
+  //   // if (!order.ok) setOrderStage(2);
+  // }, [burger, order, quantity, router, type]);
 
   const orderHandler = (
     e: React.MouseEvent<HTMLImageElement> | React.TouchEvent<HTMLImageElement>
@@ -294,9 +294,11 @@ export default function F11() {
       <div className=" text-guide flex mx-12  mt-32 font-medium mb-40">
         <GuideBox text={gptText} isLoading={loading} />
       </div>
-      <div className=" text-[70px] mx-12">
-        <div className=" mx-20">
-          {` 주문을 마치려면 "주문 완료"라고 말씀해주세요`}
+      <div className=" text-[55px] mx-12">
+        <div className=" mx-20 text-end">
+          <div>주문을 마치려면,</div>
+          <span className=" text-LightningYellow font-bold">{`"주문 완료"`}</span>
+          라고 말해주세요!
         </div>
         {/* <div className=" font-bold">주문 내역</div>
         <div className=" flex text-center">

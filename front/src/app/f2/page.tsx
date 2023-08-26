@@ -141,7 +141,7 @@ export default function F2() {
               </div>
               <div className=" text-[36px] text-gray-Light">{`${
                 item.side || ""
-              }, ${item.beverage || ""}`}</div>
+              } ${item.side ? "," : ""} ${item.beverage || ""}`}</div>
             </div>
           </div>
           <div className=" col-span-3">
@@ -223,7 +223,7 @@ export default function F2() {
               handleSetCurrentOrderNumber(order.currentOrderNumber + 1);
               router.push("/f1");
             }}
-            className=" w-1/2 rounded-[80px] bg-gray-Light_2 text-gray-Medium p-20 shadow-[5px_8px_8px_0px_rgba(0,0,0,0.15)]"
+            className=" w-1/2 rounded-[80px] bg-gray-Light_2 text-gray-Medium p-20 -[5px_8px_8px_0px_rgba(0,0,0,0.15)]"
           >
             추가 주문
           </div>
