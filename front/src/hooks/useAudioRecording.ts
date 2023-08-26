@@ -45,7 +45,7 @@ const useAudioRecording = () => {
         let silenceDuration = 0;
         const threshold = 0.02;
         const checkInterval = 200; // Check every 200 milliseconds
-        const maximumSilenceDuration = 5000;
+        const maximumSilenceDuration = 4000;
 
         const interval = setInterval(() => {
           analyser.getByteTimeDomainData(dataArray);
