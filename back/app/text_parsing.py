@@ -1,5 +1,5 @@
 from functools import partial
-from .db import *
+from db import *
 
 def parse_option(option, order, text, word, value):
     if word in text:
@@ -53,6 +53,29 @@ def parse_menu(text):
             menu['side'] = '감자튀김'
 
     return order
+
+def parse_menu_gpt(text):
+    menu = {
+        'burger': None,  # 메뉴명
+        'type': None,  # 단품 / 세트
+        'quantity': None,  # 수량
+        'beverage': None,  # 음료
+        'side': None,  # 사이드
+    }
+
+    parse_iterator(_parse_menu, menu, text, **menus)
+    parse_iterator(_parse_set, menu, text, **sets)
+    parse_iterator(_parse_amount, menu, text, **amounts)
+    parse_iterator(_parse_beverage, menu, text, **beverages)
+    parse_iterator(_parse_side, menu, text, **sides)
+
+    if menu['type'] == '세트':
+        if menu['beverage'] is None:
+            menu['beverage'] = '콜라'
+        if menu['side'] is None:
+            menu['side'] = '감자튀김'
+
+    return menu
 
 def parse_answer(text):
     answer = {
