@@ -74,6 +74,29 @@ export default function F11() {
       if (!result.ok) {
         setGptText(result.context.answer);
         setGptStage((prev) => prev + 1);
+        handleResetOrder();
+        result.menu.map((product: any, index: number) => {
+          // handleAddProduct({
+          //   ...product,
+          //   orderNumber: order.currentOrderNumber + index,
+          // });
+          handleAddProduct({
+            orderNumber: +order.currentOrderNumber + index,
+            burger: product.burger,
+            beverage: product.beverage,
+            quantity: product.quantity,
+            side: product.side,
+            type: product.type,
+            ingredients: {
+              피클: 0,
+              토마토: 0,
+              양상추: 0,
+              양파: 0,
+              고기패티: 0,
+              치즈: 0,
+            },
+          });
+        });
       } else {
         setGptText("주문이 완료되었습니다, 감사합니다.");
         result.menu.map((product: any, index: number) => {
@@ -120,83 +143,6 @@ export default function F11() {
     if (gptStage !== 5) startVoiceGuidance(gptText, handleVoiceEnd);
   }, [gptStage]);
 
-  // 주문 단계별 Flow
-  // useEffect(() => {
-  //   if (order.orderStage === 0) {
-  //     startVoiceGuidance(guideText[order.orderStage], handleVoiceEnd);
-  //   }
-
-  //   if (order.orderStage === 1) {
-  //     startVoiceGuidance(guideText[order.orderStage], () => {
-  //       setTimeout(() => {
-  //         handleSetPayStage(0);
-  //         router.push("/f2");
-  //       }, 1000);
-  //     });
-  //   }
-
-  //   if (order.orderStage === 2) {
-  //     startVoiceGuidance(
-  //       guideText[order.orderStage],
-  //       // () =>
-  //       // setTimeout(() => {
-  //       //   handleSetOrderStage(5);
-  //       // }, 10000)
-
-  //       handleVoiceEnd
-  //     );
-  //   }
-
-  //   if (order.orderStage === 3) {
-  //     startVoiceGuidance(guideText[order.orderStage]);
-  //   }
-
-  //   if (order.orderStage === 4) {
-  //     startVoiceGuidance(guideText[order.orderStage], () => {
-  //       setTimeout(() => {
-  //         handleSetPayStage(0);
-  //         router.push("/");
-  //       }, 1000);
-  //     });
-  //   }
-
-  //   if (order.orderStage === 5) {
-  //     startVoiceGuidance(guideText[order.orderStage], handleVoiceEnd);
-  //   }
-
-  //   let intervalId: NodeJS.Timeout;
-  //   if (
-  //     order.orderStage !== 2 &&
-  //     order.orderStage !== 5 &&
-  //     order.orderStage !== 3
-  //   )
-  //     setTimer(60);
-  //   intervalId = setInterval(() => {
-  //     setTimer((prevTimer) => {
-  //       console.log(prevTimer);
-  //       if (prevTimer === 21) handleSetOrderStage(4);
-  //       if (prevTimer === 31) handleSetOrderStage(3);
-  //       if (prevTimer > 1) return prevTimer - 1;
-
-  //       clearInterval(intervalId);
-  //       router.push("/");
-  //       return 0;
-  //     });
-  //   }, 1000);
-
-  //   return () => clearInterval(intervalId);
-  // }, [order.orderStage]);
-
-  // redux order state 변경되었을 경우
-  // useEffect(() => {
-  //   if (initialRender.current) {
-  //     initialRender.current = false;
-  //     return;
-  //   }
-  //   console.log(order);
-  //   // if (!order.ok) setOrderStage(2);
-  // }, [burger, order, quantity, router, type]);
-
   const orderHandler = (
     e: React.MouseEvent<HTMLImageElement> | React.TouchEvent<HTMLImageElement>
   ) => {
@@ -220,12 +166,19 @@ export default function F11() {
     });
   };
 
+  function burgerToEnglish(input: string) {
+    if (input.includes("불고기")) return "bulgogi";
+    else if (input.includes("빅맥")) return "bigMac";
+    else if (input.includes("디럭스")) return "btd";
+    else return "bulgogi";
+  }
+
   return (
     <div className=" w-full items-start">
       <div className=" flex justify-start">
         <div className=" h-[300px] text-h1 font-bold pt-20 ml-10">추천메뉴</div>
       </div>
-      <div className=" grid grid-cols-3  mb-20 pt-10 pb-6 mx-14 space-x-10">
+      <div className=" grid grid-cols-3  mb-20 pb-6 mx-14 space-x-10">
         <div
           data-text="빅맥"
           className=" relative col-span-1 overflow-hidden shadow-[5px_8px_8px_0px_rgba(0,0,0,0.15)] rounded-[60px] "
@@ -263,7 +216,7 @@ export default function F11() {
               height={407.62}
             />
           </div>
-          <div className=" flex-col text-center mt-20 relative bottom-[26px]">
+          <div className=" flex-col text-center mt-16 relative bottom-[26px]">
             <div className=" text-[50px] text-gray-Medium">단품 5,900원</div>
             <div className=" text-[50px] text-gray-Medium">세트 8,300원</div>
           </div>
@@ -291,7 +244,7 @@ export default function F11() {
           </div>
         </div>
       </div>
-      <div className=" text-guide flex mx-12  mt-32 font-medium mb-40">
+      <div className=" text-guide flex mx-12  mt-20 font-medium mb-20">
         <GuideBox text={gptText} isLoading={loading} />
       </div>
       <div className=" text-[55px] mx-12">
@@ -317,6 +270,26 @@ export default function F11() {
             </div>
           ))}
         </div> */}
+      </div>
+      <div className=" mx-12 overflow-hidden">
+        <div className=" text-[70px] font-bold mb-10">실시간 주문 내역</div>
+        <div className=" flex text-center  space-x-6">
+          {order.products.map((product, index) => (
+            <div className=" flex flex-col relative" key={product?.orderNumber}>
+              <Image
+                className=" rounded-full shadow-[5px_8px_8px_0px_rgba(0,0,0,0.15)] pb-10 mb-4"
+                src={`/burgers/${burgerToEnglish(product?.burger)}.png`}
+                alt=""
+                width={250}
+                height={250}
+              />
+              <div className=" bg-LightningYellow rounded-full text-white absolute right-[-30px] top-[-40px] text-[60px] w-[98px] h-[98px] flex justify-center items-center text-center">
+                {product?.quantity}
+              </div>
+              <div className=" text-[40px]">{product?.burger}</div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
