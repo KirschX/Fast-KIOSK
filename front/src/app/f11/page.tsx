@@ -1,25 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import Character_head from "@public/character_head.svg";
-import DoubleQMarkLeft from "@public/doubleQMarkLeft.svg";
-import DoubleQMarkRight from "@public/doubleQMarkRight.svg";
 
 import useOrder from "@/hooks/useOrder";
-import { Product } from "@/redux/slices/orderTypes";
+
 import { useEffect, useRef, useState } from "react";
 import useVoiceGuidance from "@/hooks/useVoiceGuidance";
 import useAudioRecording from "@/hooks/useAudioRecording";
-import TextBox from "@/components/textBox";
+
 import GuideBox from "@/components/guideBox";
 
 import { useRouter } from "next/navigation";
-import { processVoiceToOrderState } from "@/redux/thunks/orderThunks";
-
-// import { resetOrder, updateProduct } from "@/redux/slices/orderSlice";
 
 export default function F11() {
-  const [timer, setTimer] = useState(60);
   const router = useRouter();
 
   const {
@@ -30,10 +23,10 @@ export default function F11() {
     handleSetOrderStage,
     handleSetPayStage,
   } = useOrder();
-  const cur = order.currentOrderNumber;
-  const { isTakeout } = order;
-  const { orderNumber, burger, side, quantity, beverage, type } =
-    order.products[cur] || {};
+
+  // const { isTakeout } = order;
+  // const { orderNumber, burger, side, quantity, beverage, type } =
+  //   order.products[cur] || {};
 
   // const guideText = [
   //   "원하는 메뉴와 사이드 변경, 요청사항 등을 편하게 말씀해 주세요!",
@@ -53,7 +46,9 @@ export default function F11() {
 
   const handleVoiceEnd = async () => {
     const response = await startRecording();
+
     if (response) {
+      setGptText("주문을 확인 중이에요. 잠시만 기다려주세요.");
       // await handleAddProduct(response);
       const formData = new FormData();
       formData.append("audio_file", response, "audio.webm");
@@ -121,8 +116,8 @@ export default function F11() {
             },
           });
         });
-        setGptStage(5);
         setTimeout(() => {
+          setGptStage(5);
           router.push("/f2");
         }, 4000);
         return;
@@ -138,6 +133,10 @@ export default function F11() {
 
     //
   }, []);
+
+  useEffect(() => {
+    if (loading) setGptText("듣고 있어요. 말씀해주세요!");
+  }, [loading]);
 
   useEffect(() => {
     if (gptStage !== 5) startVoiceGuidance(gptText, handleVoiceEnd);
