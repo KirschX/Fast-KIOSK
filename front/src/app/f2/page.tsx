@@ -107,7 +107,7 @@ export default function F2() {
 
   return (
     <div className=" w-full items-start">
-      <div className=" flex justify-start mb-20">
+      <div className=" flex justify-start mb-14">
         <div className=" h-[300px] text-h1 font-bold pt-20 ml-10">주문내역</div>
       </div>
       <div className=" grid grid-cols-11 text-[50px] mx-10 text-center">
@@ -117,7 +117,7 @@ export default function F2() {
         <div className=" col-span-2">수량변경</div>
         <div className=" col-span-1">취소</div>
       </div>
-      <div className=" col-span-4 border-b-[1px] mb-20"> </div>
+      <div className=" col-span-4 border-b-[1px] mb-10"> </div>
       {order.products.map((item, index) => (
         <div
           key={index}
@@ -139,7 +139,9 @@ export default function F2() {
                     : displayText;
                 })()}
               </div>
-              <div className=" text-[36px] text-gray-Light">{`${item.side}, ${item.beverage}`}</div>
+              <div className=" text-[36px] text-gray-Light">{`${
+                item.side || ""
+              } ${item.side ? "," : ""} ${item.beverage || ""}`}</div>
             </div>
           </div>
           <div className=" col-span-3">
@@ -209,7 +211,7 @@ export default function F2() {
         </div>
       ))}
       <div className=" col-span-4 border-b-[1px]"> </div>
-      <div className=" flex justify-end p-4 text-guide font-bold mb-40">{`총 ${totalPrice}원`}</div>
+      <div className=" flex justify-end p-4 text-guide font-bold mb-32">{`총 ${totalPrice}원`}</div>
       <div className=" mb-20">
         <GuideBox isLoading={loading}>{guideTextJSX[order.payStage]}</GuideBox>
       </div>
@@ -219,7 +221,7 @@ export default function F2() {
             onClick={() => {
               handleSetOrderStage(0);
               handleSetCurrentOrderNumber(order.currentOrderNumber + 1);
-              router.push("/f1");
+              router.push("/f11");
             }}
             className=" w-1/2 rounded-[80px] bg-gray-Light_2 text-gray-Medium p-20 shadow-[5px_8px_8px_0px_rgba(0,0,0,0.15)]"
           >
@@ -240,7 +242,7 @@ export default function F2() {
             handleResetOrder();
             // handleRemoveProduct(order.currentOrderNumber);
             handleSetOrderStage(0);
-            router.push("/f1");
+            router.push("/f11");
           }}
         >
           <div className="w-full rounded-[80px] bg-gray-Light_2 text-gray-Medium p-4 mx-20 mt-20 shadow-lg">

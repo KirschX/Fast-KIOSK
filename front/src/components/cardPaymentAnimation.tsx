@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 export default function CardPaymentAnimation() {
   return (
-    <div className="bg-gray-400 w-[400px] h-[80px] rounded-[70px] mb-[700px] flex justify-center mt-80 relative">
+    <div className="bg-gray-400 w-[400px] h-[80px] rounded-[70px] mb-[500px] flex justify-center mt-80 relative">
       {/* Card Slot */}
       <div className="absolute bg-gray-600 w-[210px] h-[30px] top-[30px] rounded-t-xl"></div>
 

@@ -42,6 +42,7 @@ const useOrder = () => {
 
       try {
         const result = await dispatch(processVoiceToOrderState(input));
+
         if (result.payload.burger) {
           dispatch(setOrderStage(1));
         } else {

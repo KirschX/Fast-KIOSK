@@ -68,20 +68,20 @@ export default function Home() {
 
   return (
     <div className=" flex justify-center items-center">
-      <div className=" relative top-16 left-6">
+      {/* <div className=" relative top-16 left-6">
         <Image src="/character.png" alt="" width={500} height={1000} />
-      </div>
+      </div> */}
       <div className=" flex flex-col items-center relative mt-24">
         {/* <button onClick={startVoiceGuidance}>Start Voice Guidance</button> */}
         <div className=" ml-10 mb-10">
           <div className="text-h1 font-bold whitespace-nowrap ">
             어디에서 드시나요?
           </div>
-          <div className=" flex ml-4">
+          {/* <div className=" flex ml-4">
             <div className=" text-h3 font-medium">
               <div>안녕하세요, 쉽고 빠른 음성 주문을 경험해보세요!</div>
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div className="flex bg-white p-4 rounded-lg text-[48px]">
@@ -110,7 +110,25 @@ export default function Home() {
             <div className=" mt-20 font-bold text-h2">{`"매장에서"`}</div>
           </div>
         </div>
-        <div className="flex bg-white p-4 rounded-lg"></div>
+        <div className="flex-col bg-white p-4 rounded-lg mt-20">
+          <div className=" mx-48 text-h2 mb-12 mt-10 font-bold">
+            대화형 주문(GPT 모드)
+          </div>
+          <div className=" mx-48 text-[50px]">
+            GPT 베타 버전 입니다. 아래 버튼을 눌러 실제 종업원과 대화하듯이
+            메뉴를 주문해 보세요!
+          </div>
+          <div
+            onClick={() => {
+              router.push("/f11");
+            }}
+            className=" flex justify-center items-center mt-20 "
+          >
+            <div className="w-full rounded-[50px] bg-gray-Light_2 text-gray-Medium p-4 mx-48 shadow-lg text-h2 text-center">
+              대화형 주문하기!
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
