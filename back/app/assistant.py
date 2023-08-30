@@ -1,6 +1,7 @@
 from db import *
-from text_parsing import parse_iterator, _parse_set, _parse_amount, _parse_beverage, _parse_side
+from text_parsing import parse_iterator, _parse_set, _parse_amount, _parse_beverage, _parse_side, delete_menu, recommend_menu
 from gpt import GPT
+
 
 class Assistant:
     def __init__(self):
@@ -20,7 +21,7 @@ class Assistant:
     def create_new_menu(self, burger):
         self.menu[burger] = {
             'type': None,  # 단품 / 세트
-            'quantity': None,  # 수량
+            'quantity': 1,  # 수량
             'beverage': None,  # 음료
             'side': None,  # 사이드
             'option': None,  # 추가 옵션
@@ -78,12 +79,10 @@ class Assistant:
                     option = sentence[index:]
                     option = option.replace(value, '').replace('으로', '').replace('으로는', '').replace('은', '')
                     return option
-    def take_order(self, text):
-        if '완료' in text:
-            return self.ask_takeout(text)
 
-        if '포장' in text or '매장' in text:
-            return self.complete_order(text)
+    def take_order(self, text):
+        # if recommend_menu(text):
+        #     return self.recommend_menu(text)
 
         sentences, burgers = self.get_burgers(text)
         menus = self.get_menus_from_burgers(burgers)
@@ -99,10 +98,21 @@ class Assistant:
             burger_text = sentences[n]
             self.current_menu = menu
 
+            if delete_menu(burger_text):
+                try:
+                    burger = burgers[n]
+                except:
+                    continue
+
+                if burger in self.menu:
+                    del self.menu[burger]
+                    continue
+
             parse_iterator(_parse_set, menu, burger_text, **sets)
             parse_iterator(_parse_amount, menu, burger_text, **amounts)
             parse_iterator(_parse_beverage, menu, burger_text, **beverages)
             parse_iterator(_parse_side, menu, burger_text, **sides)
+
             options = self.get_options(text)
             if options:
                 menu['option'] = options
@@ -113,6 +123,11 @@ class Assistant:
                 if menu['side'] is None:
                     menu['side'] = '감자튀김'
 
+        if '포장' in text or '고정' in text or '보장' in text or '매장' in text:
+            return self.complete_order(text)
+
+        if '완료' in text:
+            return self.ask_takeout(text)
 
         final_order = self.return_final_order()
         final_order['context'] = {
@@ -153,7 +168,7 @@ class Assistant:
         return final_order
 
     def complete_order(self, text):
-        if '포장' in text:
+        if '포장' in text or '고정' in text or '보장' in text:
             context = {
                 'question': text,
                 'answer': '네 잠시만 기다리시면 메뉴를 포장해서 드리겠습니다. 저희 매장을 이용해주셔서 감사합니다.'
@@ -167,11 +182,20 @@ class Assistant:
         final_order = self.return_final_order()
         final_order['ok'] = True
         final_order['context'] = context
-        final_order['isTakeout'] = '포장' in text
+        final_order['isTakeout'] = '포장' in text or '고정' in text or '보장' in text
 
         self.reset_menu()
         self.gpt.initialize_messages()
         return final_order
+
+    def recommend_menu(self, text):
+        recomm_menu = {
+            'question': text,
+            'answer': '추천 메뉴는 ~'
+        }
+
+        return recomm_menu
+
 
 if __name__ == '__main__':
     assistant = Assistant()
