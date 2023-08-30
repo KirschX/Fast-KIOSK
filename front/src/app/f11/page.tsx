@@ -216,8 +216,8 @@ export default function F11() {
             />
           </div>
           <div className=" flex-col text-center mt-16 relative bottom-[26px]">
-            <div className=" text-[50px] text-gray-Medium">단품 5,900원</div>
-            <div className=" text-[50px] text-gray-Medium">세트 8,300원</div>
+            <div className=" text-[50px] text-gray-Medium">단품 4,500원</div>
+            <div className=" text-[50px] text-gray-Medium">세트 5,900원</div>
           </div>
         </div>
         <div
@@ -238,8 +238,8 @@ export default function F11() {
             />
           </div>
           <div className=" flex-col text-center mt-20">
-            <div className=" text-[50px] text-gray-Medium">단품 5,900원</div>
-            <div className=" text-[50px] text-gray-Medium">세트 8,300원</div>
+            <div className=" text-[50px] text-gray-Medium">단품 5,800원</div>
+            <div className=" text-[50px] text-gray-Medium">세트 8,200원</div>
           </div>
         </div>
       </div>

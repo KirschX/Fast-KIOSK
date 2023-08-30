@@ -41,6 +41,10 @@ export const computeTotalPrice = (
 
     // 메인 메뉴 계산
     if (burgerType) {
+      console.log(
+        menuPrices.burger[burgerType][0],
+        menuPrices.burger[burgerType][1]
+      );
       productPrice +=
         item.type === "단품"
           ? menuPrices.burger[burgerType][0] * item.quantity

@@ -35,7 +35,12 @@ export default function F3() {
       <div className=" flex justify-start">
         <div className=" h-[300px] text-h1 font-bold pt-20 ml-10">결제하기</div>
       </div>
-      <div className=" flex justify-center items-center relative bottom-20">
+      <div
+        onClick={() => {
+          router.push("/f4");
+        }}
+        className=" flex justify-center items-center relative bottom-20"
+      >
         {/* <div className=" bg-gray-400 w-[1000px] h-[1000px] mb-32"></div> */}
         <CardPaymentAnimation />
       </div>
@@ -48,7 +53,12 @@ export default function F3() {
         </div>
       </div>
       <div className=" flex justify-center items-center ">
-        <div className="w-full relative rounded-[50px] flex bg-gray-Light_2 text-gray-Medium py-16 mx-20 shadow-lg text-h2 text-center justify-center">
+        <div
+          onClick={() => {
+            router.push("/f2");
+          }}
+          className="w-full relative rounded-[50px] flex bg-gray-Light_2 text-gray-Medium py-16 mx-20 shadow-lg text-h2 text-center justify-center"
+        >
           <div>결제 취소</div>
           {/* <div className=" absolute w-[150px] h-[150px] right-20 flex items-center">
             <LoadingRing isLoading={true} />
@@ -60,14 +70,6 @@ export default function F3() {
             <TimerBox time={timer} isLoading={true} />
           </div>
         </div>
-      </div>
-      <div
-        className=" text-[50px]"
-        onClick={() => {
-          router.push("/f4");
-        }}
-      >
-        결제 완료
       </div>
     </div>
   );

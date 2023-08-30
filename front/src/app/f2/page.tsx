@@ -221,9 +221,9 @@ export default function F2() {
             onClick={() => {
               handleSetOrderStage(0);
               handleSetCurrentOrderNumber(order.currentOrderNumber + 1);
-              router.push("/f1");
+              router.push("/f11");
             }}
-            className=" w-1/2 rounded-[80px] bg-gray-Light_2 text-gray-Medium p-20 -[5px_8px_8px_0px_rgba(0,0,0,0.15)]"
+            className=" w-1/2 rounded-[80px] bg-gray-Light_2 text-gray-Medium p-20 shadow-[5px_8px_8px_0px_rgba(0,0,0,0.15)]"
           >
             추가 주문
           </div>
@@ -242,7 +242,7 @@ export default function F2() {
             handleResetOrder();
             // handleRemoveProduct(order.currentOrderNumber);
             handleSetOrderStage(0);
-            router.push("/f1");
+            router.push("/f11");
           }}
         >
           <div className="w-full rounded-[80px] bg-gray-Light_2 text-gray-Medium p-4 mx-20 mt-20 shadow-lg">
