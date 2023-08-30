@@ -11,7 +11,7 @@ const useVoiceGuidance = () => {
     const script = input;
     const newUtterance = new SpeechSynthesisUtterance(script);
     newUtterance.lang = lang;
-    newUtterance.rate = 0.5;
+    newUtterance.rate = 0.8;
 
     if (onEndCallback) {
       newUtterance.onend = (event) => {
