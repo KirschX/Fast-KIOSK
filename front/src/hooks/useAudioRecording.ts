@@ -43,7 +43,7 @@ const useAudioRecording = () => {
         const dataArray = new Uint8Array(analyser.frequencyBinCount);
 
         let silenceDuration = 0;
-        const threshold = 0.02;
+        const threshold = 0.03;
         const checkInterval = 200; // Check every 200 milliseconds
         const maximumSilenceDuration = 4000;
 

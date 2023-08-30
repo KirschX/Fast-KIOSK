@@ -7,7 +7,7 @@ export const processVoiceToOrderState = createAsyncThunk(
     formData.append("audio_file", audioToSend, "audio.webm");
 
     const response = await fetch(
-      "https://sr-kiosk-api-shs2783.koyeb.app/api/stt/gpt",
+      "https://sr-kiosk-api-shs2783.koyeb.app/api/stt/menu",
       {
         method: "POST",
         headers: {
@@ -18,7 +18,7 @@ export const processVoiceToOrderState = createAsyncThunk(
     );
 
     const result = await response.json();
-    console.log(result);
+
     if (!response.ok) {
       throw new Error("Server responded with a non-200 status");
     }
